@@ -1,0 +1,76 @@
+<form [formGroup]="formulario" (ngSubmit)="submit()" style="padding:50px">
+  <div class="row">
+    <div class="col">
+      <label>Title </label>
+      <br>
+      <select formControlName="title">
+        <option value=""></option>
+        <option value="Mr">Mr</option>
+        <option value="Mrs">Mrs</option>
+        <option value="Miss">Miss</option>
+        <option value="Ms">Ms</option>
+      </select>
+      <div *ngIf="formulario.get('title')?.errors?.['required']">Title is required</div>
+    </div>
+    <div class="col">
+      <label>First Name </label>
+      <br>
+      <input type="text" formControlName="firstName" required>
+      <div *ngIf="formulario.get('firstName')?.errors?.['required']">First Name is required</div>
+    </div>
+    <div class="col">
+      <label>Last Name </label>
+      <br>
+      <input type="text" formControlName="lastName" required>
+      <div *ngIf="formulario.get('lastName')?.errors?.['required']">Last Name is required</div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <label>Date of Birth </label>
+      <br>
+      <input type="date" formControlName="birth" required>
+      <div *ngIf="formulario.get('birth')?.errors?.['required']">Date of Birth is required</div>
+    </div>
+    <div class="col">
+      <label>Email </label>
+      <br>
+      <input type="text" formControlName="email" required>
+      <div *ngIf="formulario.get('email')?.errors?.['required']">Email is required</div>
+      <div *ngIf="formulario.get('email')?.errors?.['email']">Email must be a valid email address</div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <label>Password </label>
+      <br>
+      <input type="text" formControlName="password" required>
+      <div *ngIf="formulario.get('password')?.errors?.['required']">Password is required</div>
+      <div *ngIf="formulario.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+    </div>
+    <div class="col">
+      <label>Confirm Password </label>
+      <br>
+      <input type="text" formControlName="passwordConfirm" required>
+      <div *ngIf="formulario.get('passwordConfirm')?.errors?.['required']">Password is required</div>
+      <div *ngIf="formulario.get('passwordConfirm')?.errors?.['match']">Passwords must match</div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <input type="checkbox" formControlName="check"> Accept Terms & Conditions
+      <div *ngIf="formulario.get('check')?.errors?.['requiredtrue']"></div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <button type="submit" style="margin-right: 20px">Register</button>
+      <button>Cancel</button>
+    </div>
+  </div>
+</form>
+
