@@ -4,10 +4,7 @@ export class ValidatorsForm {
   static match (control : AbstractControl) : ValidationErrors | null {
     let password = control.value
     let passwordConfirm = control.value
-    if (password == passwordConfirm){
-      return null
-    }else{
-      return {match : true}
-    }
+    if (password == passwordConfirm) return null
+    else return {match : true}
   }
 }
