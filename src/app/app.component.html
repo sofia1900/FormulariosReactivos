@@ -1,0 +1,25 @@
+<form [formGroup]="formulario" style="padding:20px" (ngSubmit)="enviar()">
+  <label>Number of Tickets</label>
+  <br>
+  <select formControlName="numberOfTickets" (change)="onNumeroTicketsChange()">
+    <option *ngFor="let n of numeros" [value]="n">
+      {{n}}
+    </option>
+  </select>
+  <br>
+  <br>
+  <div *ngFor="let ticket of ticketFormGroups; let i = index">
+    <h4>Ticket {{i+1}}</h4>
+    <div [formGroup]="ticket">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre" style="margin-right:20px">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
+    <br>
+  </div>
+  <br><br>
+  <button type="submit" style="margin-right:20px">Buy Tickets</button>
+  <button type="reset" (click)="resert()" style="margin-right:20px">Resert</button>
+  <button (click)="clear()">Clear</button>
+</form>
