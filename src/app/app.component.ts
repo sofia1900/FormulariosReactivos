@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ValidatorsForm} from "./ValidatorsForm";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -8,19 +7,34 @@ import {ValidatorsForm} from "./ValidatorsForm";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  formulario = new FormGroup({
-    title : new FormControl ('', [Validators.required]),
-    firstName : new FormControl ('', [Validators.required]),
-    lastName : new FormControl ('', [Validators.required]),
-    email : new FormControl ('', [Validators.required, Validators.email]),
-    password : new FormControl ('', [Validators.required, Validators.minLength(8)]),
-    passwordConfirm : new FormControl ('', [Validators.required, ValidatorsForm.match]),
-    check : new FormControl ('', [Validators.requiredTrue])
-  })
+
+  constructor(private fb: FormBuilder) { }
+
+  formulario = this.fb.group({
+    title : ['', [Validators.required]],
+    firstName : ['', [Validators.required]],
+    lastName :  ['', [Validators.required]],
+    birth :  ['', [Validators.required]],
+    email : ['', [Validators.required, Validators.email]],
+    password :  ['', [Validators.required, Validators.minLength(8)]],
+    passwordConfirm :  ['', [Validators.required]],
+    check :  ['', [Validators.requiredTrue]]
+  },
+    {validators : this.passwordMatchValidator}
+  )
 
   submit() {
     if(this.formulario.valid){
       alert("enviado");
+      this.formulario.reset()
     }
   }
+
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')!.value;
+    const confirmPassword = form.get('passwordConfirm')!.value;
+
+    return password === confirmPassword ? null : { mismatch: true };
+  }
+
 }
